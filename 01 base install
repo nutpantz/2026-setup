@@ -6,3 +6,58 @@ sudo apt install speedtest-cli webhttrack
 sudo apt install openssh-sftp-server lighttpd lighttpd-mod-webdav radicale
 ######## optional
 sudo apt install fim lynx jigdo-file
+
+
+
+This XML file does not appear to have any style information associated with it. The document tree is shown below.
+<D:multistatus>
+<D:response>
+<D:href>/</D:href>
+<D:propstat>
+<D:prop>
+<D:lockdiscovery/>
+<D:resourcetype>
+<D:collection/>
+</D:resourcetype>
+<D:displayname/>
+<D:supportedlock>
+<D:lockentry>
+<D:lockscope>
+<D:exclusive/>
+</D:lockscope>
+<D:locktype>
+<D:write/>
+</D:locktype>
+</D:lockentry>
+</D:supportedlock>
+<D:getlastmodified>Wed, 01 Jul 2026 16:14:45 GMT</D:getlastmodified>
+</D:prop>
+<D:status>HTTP/1.1 200 OK</D:status>
+</D:propstat>
+</D:response>
+<D:response>
+<D:href>/sftpgo_2.7.4-1_amd64.deb</D:href>
+<D:propstat>
+<D:prop>
+<D:resourcetype/>
+<D:displayname>sftpgo_2.7.4-1_amd64.deb</D:displayname>
+<D:getetag>"18be352c5c14df4011b1bb8"</D:getetag>
+<D:supportedlock>
+<D:lockentry>
+<D:lockscope>
+<D:exclusive/>
+</D:lockscope>
+<D:locktype>
+<D:write/>
+</D:locktype>
+</D:lockentry>
+</D:supportedlock>
+<D:getcontentlength>18553784</D:getcontentlength>
+<D:getlastmodified>Wed, 01 Jul 2026 15:49:27 GMT</D:getlastmodified>
+<D:getcontenttype>application/vnd.debian.binary-package</D:getcontenttype>
+<D:lockdiscovery/>
+</D:prop>
+<D:status>HTTP/1.1 200 OK</D:status>
+</D:propstat>
+</D:response>
+</D:multistatus>
