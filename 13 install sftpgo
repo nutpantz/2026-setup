@@ -1,2 +1,20 @@
 download and install
 https://github.com/drakkan/sftpgo/releases/tag/v2.7.4
+or 
+Import the public key used by the package management system:
+
+curl -sS https://download.sftpgo.com/apt/gpg.key | sudo gpg --dearmor -o /usr/share/keyrings/sftpgo-archive-keyring.gpg
+
+If you receive an error indicating that gnupg is not installed, you can install it using the following command:
+
+sudo apt install gnupg
+
+Create the SFTPGo source list file:
+
+CODENAME=`lsb_release -c -s`
+echo "deb [signed-by=/usr/share/keyrings/sftpgo-archive-keyring.gpg] https://download.sftpgo.com/apt ${CODENAME} main" | sudo tee /etc/apt/sources.list.d/sftpgo.list
+
+Reload the package database and install SFTPGo:
+
+sudo apt update
+sudo apt install sftpgo
