@@ -18,3 +18,33 @@ Reload the package database and install SFTPGo:
 
 sudo apt update
 sudo apt install sftpgo
+
+
+-------------------------------------------------------------------------------------
+On Linux with official packages, set environment variables in /etc/sftpgo/sftpgo.env or in individual files under /etc/sftpgo/env.d/
+-------------------------------------------------------------------------------------------
+Enable FTP service
+
+The FTP service is disabled by default. To enable it, set the port:
+
+SFTPGO_FTPD__BINDINGS__0__PORT=2121
+
+The FTP service is now available on port 2121.
+
+For passive FTP, the default port range is 50000-50100 — these ports must be reachable by clients. If SFTPGo is behind NAT, set force_passive_ip to your external IP:
+
+SFTPGO_FTPD__BINDINGS__0__FORCE_PASSIVE_IP=203.0.113.10
+SFTPGO_FTPD__PASSIVE_PORT_RANGE__START=50000
+SFTPGO_FTPD__PASSIVE_PORT_RANGE__END=50100
+
+It is strongly recommended to enable TLS. You can configure a certificate file or use the built-in Let's Encrypt integration. For details, see FTP configuration.
+Enable WebDAV service
+
+The WebDAV service is disabled by default. To enable it, set the port:
+
+SFTPGO_WEBDAVD__BINDINGS__0__PORT=10080
+
+The WebDAV service is now available on port 10080. It is strongly recommended to enable HTTPS — configure a certificate or use Let's Encrypt. For details, see WebDAV configuration.
+
+
+
