@@ -1,0 +1,78 @@
+Install and Configure Tiger VNC Server
+
+The installation of Tiger VNC server will vary depending on your Linux distro, but the configuration steps should be the same. You can use the appropriate command below to install Tiger VNC with your system’s package manager.
+
+To install Tiger VNC on Ubuntu, Debian, and Linux Mint:
+
+$ sudo apt update
+$ sudo apt install tigervnc-common tigervnc-standalone-server tigervnc-tools tigervnc-viewer
+
+To install Tiger VNC on Fedora, CentOS, AlmaLinux, and Red Hat:
+
+$ sudo dnf install tigervnc tigervnc-icons tigervnc-server tigervnc-server-module tigervnc-selinux
+
+To install Tiger VNC on Arch Linux and Manjaro:
+
+$ sudo pacman -S tigervnc
+
+After installation is complete, follow the steps below to set up Tiger VNC Server:
+
+    In this step, we will create a VNC config for our current user. If you want to create a new user to use with VNC, use the useradd command and then switch to that user with su before proceeding with the next command.
+
+    $ vncpasswd
+
+    Enter your desired password twice. Optionally, you can configure a view only password, which will allow someone to connect only to view your desktop.
+
+    Create a new password to use with Tiger VNC
+    Create a new password to use with Tiger VNC
+
+    The next step is to configure some settings for our VNC server. You can use nano or your preferred text editor to create the VNC config file and apply your desired edits to it:
+
+    $ nano ~/.vnc/config
+
+    We will apply the following configuration to this file:
+
+    session=gnome
+    geometry=1920x1080
+    localhost
+    alwaysshared
+
+    You can edit the session setting with your desired desktop environment, as long as you have it installed. The geometry settings sets the native resolution of the VNC session and you can adjust it accordingly. Save your config file and exit it when done.
+    Next, we will assign a default VNC display number to our user. This is can be configured within the vncserver.users file. Use nano or your preferred text editor to open this file with root permissions:
+
+    $ sudo nano /etc/tigervnc/vncserver.users
+
+    We will assign display number 1 to our user linuxconfig. If you are setting up multiple VNC users, then each one should have their own display number.
+
+    # TigerVNC User assignment
+    #
+    # This file assigns users to specific VNC display numbers.
+    # The syntax is <display>=<username>. E.g.:
+    #
+    # :2=andrew
+    # :3=lisa
+    :1=linuxconfig
+
+    Save your changes to this file and exit it when done.
+    Next, execute the following two systemd commands with root permissions in order to start VNC server for the display number 1 and to make it start up automatically upon future system boots:
+
+    $ sudo systemctl start tigervncserver@:1
+    $ sudo systemctl enable tigervncserver@:1
+
+    Check to make sure that the service is running:
+
+    $ sudo systemctl status tigervncserver@:1
+
+    The Tiger VNC Server process is running on our system and listening for incoming connections
+    The Tiger VNC Server process is running on our system and listening for incoming connections
+    Make sure you configure your firewall to allow incoming VNC connections. Since we are configuring display number 1 in this example, we will open port number 5901. Display 2 would use port 5902, etc.
+
+    UFW (Ubuntu):
+    $ sudo ufw allow 5901/tcp
+
+    Firewalld (Fedora / RHEL):
+    $ sudo firewall-cmd --zone=public --add-port=5901/tcp
+
+    iptables (any distro):
+    $ sudo iptables -A INPUT -m state --state NEW,ESTABLISHED -m tcp -p tcp --dport 5901 -j ACCEPT
+
